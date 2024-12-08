@@ -1,8 +1,8 @@
 const express = require('express');
 require('dotenv').config();
 
+const path = require('path');
 const bodyParser = require('body-parser');
-
 const setupSwagger = require('./swagger');
 
 const AuthRoutes    = require('./routes/AuthRoutes');
@@ -22,6 +22,10 @@ app.use('/likes', LikeRoutes);
 app.use('/reviews', ReviewRoutes);
 app.use('/songs', SongRoutes);
 app.use('/users', UserRoutes);
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 setupSwagger(app);
 
