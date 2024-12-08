@@ -1,0 +1,89 @@
+generator client {
+  provider = "prisma-client-js"
+   binaryTargets = ["native", "linux-arm64-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int       @id @default(autoincrement())
+  email         String    @unique
+  password      String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  followers     Follower[] @relation("UserFollowers")
+  following     Follower[] @relation("UserFollowing")
+  reviews       Review[]
+  likes         Like[]
+  favoriteSongs FavoriteSong[]
+  comments      Comment[]
+}
+
+model Song {
+  id        Int       @id @default(autoincrement())
+  title     String
+  artist    String
+  album     String?
+  genre     String?
+  releaseYear Int?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  reviews   Review[]
+  favorites FavoriteSong[]
+}
+
+model Review {
+  id        Int       @id @default(autoincrement())
+  content   String?
+  rating    Int       // Rating between 1 and 5
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  userId    Int
+  songId    Int
+  user      User      @relation(fields: [userId], references: [id])
+  song      Song      @relation(fields: [songId], references: [id])
+  likes     Like[]
+  comments  Comment[] @relation("ReviewComments")
+}
+
+model Like {
+  id       Int      @id @default(autoincrement())
+  userId   Int
+  reviewId Int
+  user     User     @relation(fields: [userId], references: [id])
+  review   Review   @relation(fields: [reviewId], references: [id])
+}
+
+model Comment {
+  id          Int      @id @default(autoincrement())
+  content     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  userId      Int
+  reviewId    Int?
+  parentId    Int?
+  user        User     @relation(fields: [userId], references: [id])
+  review      Review?  @relation("ReviewComments", fields: [reviewId], references: [id])
+  parent      Comment? @relation("CommentReplies", fields: [parentId], references: [id])
+  replies     Comment[] @relation("CommentReplies")
+}
+
+model FavoriteSong {
+  id       Int    @id @default(autoincrement())
+  userId   Int
+  songId   Int
+  user     User   @relation(fields: [userId], references: [id])
+  song     Song   @relation(fields: [songId], references: [id])
+}
+
+model Follower {
+  id          Int   @id @default(autoincrement())
+  followerId  Int
+  followingId Int
+  follower    User  @relation("UserFollowers", fields: [followerId], references: [id])
+  following   User  @relation("UserFollowing", fields: [followingId], references: [id])
+  createdAt   DateTime @default(now())
+}
