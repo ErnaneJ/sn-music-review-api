@@ -1,24 +1,20 @@
 const express = require('express');
-const ReviewController = require('../controllers/ReviewController');
-const authMiddleware = require('../middlewares/AuthMiddleware');
-
+const SongController = require('../controllers/SongController');
 const router = express.Router();
 
 /**
  * @swagger
  * tags:
- *   name: Reviews
- *   description: Operations related to reviews
+ *   name: Songs
+ *   description: Operations related to songs
  */
 
 /**
  * @swagger
- * /reviews:
+ * /songs:
  *   post:
- *     summary: Create a new review
- *     tags: [Reviews]
- *     security:
- *       - bearerAuth: []
+ *     summary: Create a new song
+ *     tags: [Songs]
  *     requestBody:
  *       required: true
  *       content:
@@ -26,43 +22,45 @@ const router = express.Router();
  *           schema:
  *             type: object
  *             required:
- *               - songId
- *               - rating
+ *               - title
+ *               - artist
  *             properties:
- *               songId:
- *                 type: integer
- *                 description: The ID of the song
- *               content:
+ *               title:
  *                 type: string
- *                 description: The content of the review
- *               rating:
+ *                 description: Title of the song
+ *               artist:
+ *                 type: string
+ *                 description: Artist of the song
+ *               album:
+ *                 type: string
+ *                 description: Album of the song
+ *               genre:
+ *                 type: string
+ *                 description: Genre of the song
+ *               releaseYear:
  *                 type: integer
- *                 description: Rating from 1 to 5
+ *                 description: Release year of the song
  *     responses:
  *       201:
- *         description: Review successfully created
- *       400:
- *         description: Invalid data
+ *         description: Song created successfully
  *       500:
- *         description: Error creating review
+ *         description: Error creating song
  */
-router.post('/', authMiddleware, ReviewController.createReview);
+router.post('/', SongController.createSong);
 
 /**
  * @swagger
- * /reviews/{reviewId}:
+ * /songs/{songId}:
  *   patch:
- *     summary: Update a review
- *     tags: [Reviews]
- *     security:
- *       - bearerAuth: []
+ *     summary: Update a song
+ *     tags: [Songs]
  *     parameters:
  *       - in: path
- *         name: reviewId
+ *         name: songId
  *         required: true
  *         schema:
  *           type: integer
- *         description: The ID of the review
+ *         description: ID of the song
  *     requestBody:
  *       required: true
  *       content:
@@ -70,66 +68,126 @@ router.post('/', authMiddleware, ReviewController.createReview);
  *           schema:
  *             type: object
  *             properties:
- *               content:
+ *               title:
  *                 type: string
- *                 description: The updated content of the review
- *               rating:
+ *               artist:
+ *                 type: string
+ *               album:
+ *                 type: string
+ *               genre:
+ *                 type: string
+ *               releaseYear:
  *                 type: integer
- *                 description: The updated rating from 1 to 5
  *     responses:
  *       200:
- *         description: Review successfully updated
- *       403:
- *         description: Permission denied
+ *         description: Song updated successfully
  *       500:
- *         description: Error updating review
+ *         description: Error updating song
  */
-router.patch('/:reviewId', authMiddleware, ReviewController.updateReview);
+router.patch('/:songId', SongController.updateSong);
 
 /**
  * @swagger
- * /reviews/{reviewId}:
+ * /songs/{songId}:
  *   delete:
- *     summary: Delete a review
- *     tags: [Reviews]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: reviewId
- *         required: true
- *         schema:
- *           type: integer
- *         description: The ID of the review
- *     responses:
- *       204:
- *         description: Review successfully deleted
- *       403:
- *         description: Permission denied
- *       500:
- *         description: Error deleting review
- */
-router.delete('/:reviewId', authMiddleware, ReviewController.deleteReview);
-
-/**
- * @swagger
- * /reviews/song/{songId}:
- *   get:
- *     summary: List reviews for a song
- *     tags: [Reviews]
+ *     summary: Delete a song
+ *     tags: [Songs]
  *     parameters:
  *       - in: path
  *         name: songId
  *         required: true
  *         schema:
  *           type: integer
- *         description: The ID of the song
+ *         description: ID of the song
+ *     responses:
+ *       204:
+ *         description: Song deleted successfully
+ *       500:
+ *         description: Error deleting song
+ */
+router.delete('/:songId', SongController.deleteSong);
+
+/**
+ * @swagger
+ * /songs:
+ *   get:
+ *     summary: List all songs
+ *     tags: [Songs]
  *     responses:
  *       200:
- *         description: List of reviews successfully retrieved
+ *         description: List of songs returned successfully
  *       500:
- *         description: Error retrieving reviews
+ *         description: Error listing songs
  */
-router.get('/song/:songId', ReviewController.getReviewsBySong);
+router.get('/', SongController.listSongs);
+
+/**
+ * @swagger
+ * /songs/search:
+ *   get:
+ *     summary: Search songs by title, artist, album, or genre
+ *     description: Allows searching songs using a query string that will be compared against the fields title, artist, album, or genre.
+ *     tags: [Songs]
+ *     parameters:
+ *       - name: query
+ *         in: query
+ *         description: Search string to find songs. It can be a title, artist, album, or genre.
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: List of songs that match the search query
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: integer
+ *                     description: ID of the song
+ *                   title:
+ *                     type: string
+ *                     description: Title of the song
+ *                   artist:
+ *                     type: string
+ *                     description: Artist of the song
+ *                   album:
+ *                     type: string
+ *                     description: Album of the song
+ *                   genre:
+ *                     type: string
+ *                     description: Genre of the song
+ *       400:
+ *         description: Query parameter 'query' not provided
+ *       500:
+ *         description: Internal error while searching for songs
+ */
+router.get('/search', SongController.searchSongs);
+
+/**
+ * @swagger
+ * /songs/{songId}:
+ *   get:
+ *     summary: Get details of a song
+ *     tags: [Songs]
+ *     parameters:
+ *       - in: path
+ *         name: songId
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID of the song
+ *     responses:
+ *       200:
+ *         description: Song details returned successfully
+ *       404:
+ *         description: Song not found
+ *       500:
+ *         description: Error retrieving song details
+ */
+router.get('/:songId', SongController.getSongDetails);
 
 module.exports = router;

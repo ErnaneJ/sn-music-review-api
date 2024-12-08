@@ -64,6 +64,19 @@ Operações relacionadas aos usuários.
 | `GET`   | `/users/{userId}`            | Obtém detalhes de um usuário específico.                 | `userId`                                        | `{ id, email, createdAt, updatedAt }` | ✅            |
 | `PATCH` | `/users/{userId}`            | Atualiza os dados de um usuário específico.              | `userId`, `email`, `password`                   | `{ id, email, updatedAt }`          | ✅            |
 
+## Songs
+
+Operações relacionadas a músicas
+
+| Método | Rota               | Descrição                                | Requer Autenticação |
+|--------|---------------------|------------------------------------------|---------------------|
+| POST   | /songs              | Criar uma nova música                   | ✅ Sim               |
+| GET    | /songs              | Listar todas as músicas                 | ❌ Não               |
+| PATCH  | /songs/{songId}     | Atualizar uma música                    | ✅ Sim               |
+| DELETE | /songs/{songId}     | Deletar uma música                      | ✅ Sim               |
+| GET    | /songs/{songId}     | Obter detalhes de uma música            | ❌ Não               |
+| GET    | /songs/search       | Buscar músicas por título, artista, álbum ou gênero | ❌ Não               |
+
 ## Como Levantar a Aplicação
 
 ### Passo 1: Copiar o Arquivo `.env`
@@ -112,3 +125,48 @@ npx prisma migrate reset
 ```
 
 Este comando remove todos os dados das tabelas e recria o banco de dados a partir do esquema definido no `prisma/schema.prisma`.
+
+### Usando Swagger para rotas autenticadas
+
+![swagger preview](./docs/swagger.png)
+
+Siga estas etapas para usar rotas autenticadas no Swagger:
+
+1. **Acesse o Swagger**  
+   Abra o Swagger em [http://localhost:3000/api-docs](http://localhost:3000/api-docs).
+
+2. **Crie um usuário**  
+   - Navegue até a seção **Usuários**.  
+   - Localize a rota `POST /users` (Criar).  
+   - Expanda a seção, clique em **Experimente** e edite a carga JSON com o e-mail e a senha desejados. Por exemplo:  
+     ```json
+     {
+       "email": "seu_email@exemplo.com",
+       "senha": "sua_senha"
+     }
+     ```  
+   - Clique em **Executar** para criar o usuário.
+
+3. **Faça login com o usuário**  
+   - Navegue até a seção **Autenticação**.  
+   - Localize a rota `POST /auth/login`.  
+   - Expanda a seção, clique em **Experimente** e forneça o e-mail e a senha que você usou para criar o usuário.  
+   - Clique em **Executar** para fazer login.  
+
+4. **Copie o token**  
+   - A resposta de login incluirá um token. Por exemplo:  
+     ```json
+     {
+       "token": "SEU_TOKEN_AQUI"
+     }
+     ```  
+   - Copie o valor de `"YOUR_TOKEN_HERE"`.
+
+5. **Autorizar em Swagger**  
+   - Role até o topo da página do Swagger.  
+   - Clique no botão **Autorizar** no canto superior direito.  
+   - Cole o token copiado no campo que aparece.  
+   - Clique em **Autorizar** para confirmar.
+
+6. **Você está autenticado**  
+   Uma vez autorizado, agora você pode acessar todas as rotas autenticadas no Swagger sem etapas adicionais!

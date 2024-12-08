@@ -25,7 +25,7 @@ const options = {
       { url: 'http://localhost:3000', description: 'Development Server', },
     ],
   },
-  apis: ['./src/routes/*.js'],
+  apis: ['./src/routes/AuthRoutes.js', './src/routes/CommentRoutes.js', './src/routes/LikeRoutes.js', './src/routes/ReviewRoutes.js', './src/routes/SongRoutes.js', './src/routes/UserRoutes.js'],
 };
 
 const swaggerSpec = swaggerJsdoc(options);

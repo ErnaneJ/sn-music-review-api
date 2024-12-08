@@ -89,6 +89,29 @@ class SongController {
       res.status(500).json({ error: 'Error getting song details' });
     }
   }
+
+  static async searchSongs(req, res) {
+    console.log("opa")
+    try {
+      const { query } = req.query;
+
+      const songs = await prisma.song.findMany({
+        where: {
+          OR: [
+            { title: { contains: query } },
+            { artist: { contains: query } },
+            { album: { contains: query } },
+            { genre: { contains: query } },
+          ],
+        },
+      });
+
+      res.status(200).json(songs);
+    } catch (error) {
+      console.error('Error searching songs:', error);
+      res.status(500).json({ error: 'Error searching songs' });
+    }
+  }
 }
 
 module.exports = SongController;
