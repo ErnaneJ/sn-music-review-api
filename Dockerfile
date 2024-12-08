@@ -12,15 +12,6 @@ RUN if [ "$NODE_ENV" = "production" ]; then \
 
 COPY . .
 
-RUN npx prisma generate
-RUN npx prisma migrate dev
-
 EXPOSE 3000
 
-RUN echo "Running in $NODE_ENV mode..."
-
-CMD if [ "$NODE_ENV" = "production" ]; then \
-      npm run start; \
-    else \
-      npm run start:dev& npx prisma studio; \
-    fi
+CMD npx prisma generate && npx prisma migrate dev && npm run start:dev& npx prisma studio
