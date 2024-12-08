@@ -2,6 +2,24 @@
 
 A **Music API** é uma aplicação backend desenvolvida para gerenciar músicas, usuários, avaliações, favoritos, comentários e interações entre usuários no contexto de uma plataforma musical. A API permite que os usuários registrem músicas favoritas, escrevam e leiam reviews, comentem nas músicas e interajam com outros usuários. A aplicação foi desenvolvida com **Node.js**, utilizando **Express.js** e **Prisma ORM** com **SQLite** para gerenciamento de banco de dados.
 
+## Histórias de Usuário
+
+O projeto tem como objetivo criar uma rede social de reviews de músicas, onde usuários podem interagir entre si, avaliar músicas, deixar comentários e organizar suas favoritas. As histórias de usuário abaixo representam as principais funcionalidades desejadas para a aplicação, priorizando a experiência do usuário e o objetivo central do sistema.
+
+1.⁠ ⁠Como usuário, quero me cadastrar com email e senha para acessar a plataforma.  
+2.⁠ ⁠Como usuário, quero salvar músicas como “favoritas” para encontrá-las facilmente e ver suas avaliações.  
+3.⁠ ⁠Como usuário, quero avaliar músicas com notas e comentários.  
+4.⁠ ⁠Como usuário, quero seguir outros usuários.  
+5.⁠ ⁠Como usuário, quero poder buscar músicas.
+
+## Diagrama UML
+
+O diagarama de classe UML abaixo descreve a estrutura desenvolvida para a apliacação do projeto.
+
+|Diagrama UML|
+|-------------|
+|![diagrama](./docs/image.png)|
+
 ## Tecnologias Utilizadas
 
 - **Node.js** com JavaScript puro.
@@ -68,14 +86,14 @@ Operações relacionadas aos usuários.
 
 Operações relacionadas a músicas
 
-| Método | Rota               | Descrição                                | Requer Autenticação |
+| Método | Rota               | Descrição                                | Autenticação |
 |--------|---------------------|------------------------------------------|---------------------|
-| POST   | /songs              | Criar uma nova música                   | ✅ Sim               |
-| GET    | /songs              | Listar todas as músicas                 | ❌ Não               |
-| PATCH  | /songs/{songId}     | Atualizar uma música                    | ✅ Sim               |
-| DELETE | /songs/{songId}     | Deletar uma música                      | ✅ Sim               |
-| GET    | /songs/{songId}     | Obter detalhes de uma música            | ❌ Não               |
-| GET    | /songs/search       | Buscar músicas por título, artista, álbum ou gênero | ❌ Não               |
+| `POST`   | `/songs`              | Criar uma nova música                   | ✅                |
+| `GET`    | `/songs`              | Listar todas as músicas                 | ❌              |
+| `PATCH`  | `/songs/{songId}`     | Atualizar uma música                    | ✅               |
+| `DELETE` | `/songs/{songId}`     | Deletar uma música                      | ✅              |
+| `GET`    | `/songs/{songId}`     | Obter detalhes de uma música            | ❌             |
+| `GET`    | `/songs/search`       | Buscar músicas por título, artista, álbum ou gênero | ❌              |
 
 ## Como Levantar a Aplicação
 
