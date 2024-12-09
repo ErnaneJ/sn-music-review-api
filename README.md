@@ -30,8 +30,14 @@ Critério de aceitação:
 Como usuário, quero avaliar músicas com notas e comentários.
 Critério de aceitação:
   - 
-4.⁠ ⁠Como usuário, quero seguir outros usuários.  
-5.⁠ ⁠Como usuário, quero poder buscar músicas.
+4.⁠ Seguir usuários
+⁠Como usuário, quero seguir outros usuários.
+Critério de aceitação:
+  - 
+5. Buscar por músicas⁠ ⁠
+Como usuário, quero poder buscar músicas.
+Critério de aceitação:
+  -
 
 ## Diagrama UML
 
