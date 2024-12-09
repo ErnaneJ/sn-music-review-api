@@ -18,11 +18,11 @@ A **Music API** é uma aplicação backend desenvolvida para gerenciar músicas,
 
 O projeto tem como objetivo criar uma rede social de reviews de músicas, onde usuários podem interagir entre si, avaliar músicas, deixar comentários e organizar suas favoritas. As histórias de usuário abaixo representam as principais funcionalidades desejadas para a aplicação, priorizando a experiência do usuário e o objetivo central do sistema.
 
-1. Cadastrar usuário<br>Como usuário, quero me cadastrar com email e senha para acessar a plataforma.<br>Critério de aceitação:<br>  - O sistema deve notifica caso email já está em uso.
-2. Favoritar músicas<br>Como usuário, quero salvar músicas como “favoritas” para encontrá-las facilmente e ver suas avaliações.<br>Critério de aceitação:<br>  - 
-3. Avaliar músicas<br>Como usuário, quero avaliar músicas com notas e comentários.<br>Critério de aceitação:<br>  - 
-4. Seguir usuários<br>Como usuário, quero seguir outros usuários.<br>Critério de aceitação:<br>  - 
-5. Buscar por músicas<br>Como usuário, quero poder buscar músicas.<br>Critério de aceitação:<br>  - 
+1. Cadastrar usuário<br>Como usuário, quero me cadastrar com email e senha para acessar a plataforma.<br><br>Critério de aceitação:<br>  - O sistema deve notifica caso email já está em uso.
+2. Favoritar músicas<br>Como usuário, quero salvar músicas como “favoritas” para encontrá-las facilmente e ver suas avaliações.<br><br>Critério de aceitação:<br>  - 
+3. Avaliar músicas<br>Como usuário, quero avaliar músicas com notas e comentários para compartilhar minhas opniões.<br><br>Critério de aceitação:<br>  - 
+4. Seguir usuários<br>Como usuário, quero seguir outros usuários para poder acompanhar suas atividades.<br><br>Critério de aceitação:<br>  - 
+5. Buscar por músicas<br>Como usuário, quero poder buscar músicas para poder encontrar rapidamente aquelas que me interessam.<br><br>Critério de aceitação:<br>  - 
 
 ## Diagrama UML
 
