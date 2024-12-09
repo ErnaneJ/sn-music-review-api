@@ -18,26 +18,11 @@ A **Music API** é uma aplicação backend desenvolvida para gerenciar músicas,
 
 O projeto tem como objetivo criar uma rede social de reviews de músicas, onde usuários podem interagir entre si, avaliar músicas, deixar comentários e organizar suas favoritas. As histórias de usuário abaixo representam as principais funcionalidades desejadas para a aplicação, priorizando a experiência do usuário e o objetivo central do sistema.
 
-1.⁠ Cadastrar usuário
-⁠Como usuário, quero me cadastrar com email e senha para acessar a plataforma.  
-Critério de aceitação:
-  - O sistema deve notificar caso email já está em uso.
-2.⁠ ⁠Favoritar músicas
-Como usuário, quero salvar músicas como “favoritas” para encontrá-las facilmente e ver suas avaliações.
-Critério de aceitação:
-  - Algum criterio
-3.⁠ ⁠Avaliar músicas
-Como usuário, quero avaliar músicas com notas e comentários.
-Critério de aceitação:
-  - 
-4. Seguir usuários⁠ ⁠
-Como usuário, quero seguir outros usuários.
-Critério de aceitação:
-  -
-5. Buscar por músicas⁠ ⁠
-Como usuário, quero poder buscar músicas.
-Critério de aceitação:
-  -
+1. Cadastrar usuário<br>Como usuário, quero me cadastrar com email e senha para acessar a plataforma.<br>Critério de aceitação:<br>  - O sistema deve notifica caso email já está em uso.
+2. Favoritar músicas<br>Como usuário, quero salvar músicas como “favoritas” para encontrá-las facilmente e ver suas avaliações.<br>Critério de aceitação:<br>  - 
+3. Avaliar músicas<br>Como usuário, quero avaliar músicas com notas e comentários.<br>Critério de aceitação:<br>  - 
+4. Seguir usuários<br>Como usuário, quero seguir outros usuários.<br>Critério de aceitação:<br>  - 
+5. Buscar por músicas<br>Como usuário, quero poder buscar músicas.<br>Critério de aceitação:<br>  - 
 
 ## Diagrama UML
 
