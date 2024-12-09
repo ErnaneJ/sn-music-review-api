@@ -2,6 +2,18 @@
 
 A **Music API** é uma aplicação backend desenvolvida para gerenciar músicas, usuários, avaliações, favoritos, comentários e interações entre usuários no contexto de uma plataforma musical. A API permite que os usuários registrem músicas favoritas, escrevam e leiam reviews, comentem nas músicas e interajam com outros usuários. A aplicação foi desenvolvida com **Node.js**, utilizando **Express.js** e **Prisma ORM** com **SQLite** para gerenciamento de banco de dados.
 
+**Componentes do grupo:** 
+
+- JOSE MARTINS NETO
+
+- QUELITA MIRIAM NUNES FERRAZ
+
+- ERNANE FERREIRA ROCHA JUNIOR
+
+- ROSELIA NASCIMENTO DA SILVA
+
+- VINÍCIUS COSTA BULHÕES
+
 ## Histórias de Usuário
 
 O projeto tem como objetivo criar uma rede social de reviews de músicas, onde usuários podem interagir entre si, avaliar músicas, deixar comentários e organizar suas favoritas. As histórias de usuário abaixo representam as principais funcionalidades desejadas para a aplicação, priorizando a experiência do usuário e o objetivo central do sistema.
