@@ -25,7 +25,7 @@ Critério de aceitação:
 2.⁠ ⁠Favoritar músicas
 Como usuário, quero salvar músicas como “favoritas” para encontrá-las facilmente e ver suas avaliações.
 Critério de aceitação:
-  -
+  - Algum criterio
 3.⁠ ⁠Avaliar músicas
 Como usuário, quero avaliar músicas com notas e comentários.
 Critério de aceitação:
