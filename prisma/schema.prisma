@@ -77,6 +77,8 @@ model FavoriteSong {
   songId   Int
   user     User   @relation(fields: [userId], references: [id])
   song     Song   @relation(fields: [songId], references: [id])
+ 
+  @@unique([userId, songId])
 }
 
 model Follower {

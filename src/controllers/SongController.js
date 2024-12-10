@@ -23,6 +23,102 @@ class SongController {
     }
   }
 
+  static async listFavorites(req, res) {
+    try {
+      const userId = req.user.id;
+
+      const favoriteSongs = await prisma.favoriteSong.findMany({
+        where: {
+          userId: userId,
+        },
+        include: {
+          song: true,
+        },
+      });
+
+      const songs = favoriteSongs.map((favorite) => favorite.song);
+
+      res.status(200).json(songs);
+    } catch (error) {
+      console.error('Error listing favorite songs:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  }
+
+  static async addFavorite(req, res) {
+    try {
+      const userId = req.user.id;
+      const { songId } = req.params;
+
+      const songExists = await prisma.song.findUnique({
+        where: { id: parseInt(songId) },
+      });
+
+      if (!songExists) {
+        return res.status(404).json({ error: 'Song not found' });
+      }
+
+      const alreadyFavorited = await prisma.favoriteSong.findUnique({
+        where: {
+          userId_songId: {
+            userId: userId,
+            songId: parseInt(songId),
+          },
+        },
+      });
+
+      if (alreadyFavorited) {
+        return res.status(400).json({ error: 'Song already added to favorites' });
+      }
+
+      const favorite = await prisma.favoriteSong.create({
+        data: {
+          userId: userId,
+          songId: parseInt(songId),
+        },
+      });
+
+      res.status(201).json(favorite);
+    } catch (error) {
+      console.error('Error adding song to favorites:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  }
+
+  static async removeFavorite(req, res) {
+    try {
+      const userId = req.user.id;
+      const { songId } = req.params;
+
+      const favorite = await prisma.favoriteSong.findUnique({
+        where: {
+          userId_songId: {
+            userId: userId,
+            songId: parseInt(songId),
+          },
+        },
+      });
+
+      if (!favorite) {
+        return res.status(404).json({ error: 'Favorite song not found' });
+      }
+
+      await prisma.favoriteSong.delete({
+        where: {
+          userId_songId: {
+            userId: userId,
+            songId: parseInt(songId),
+          },
+        },
+      });
+
+      res.status(204).send(); // No content response for successful deletion
+    } catch (error) {
+      console.error('Error removing favorite song:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  }
+
   static async updateSong(req, res) {
     try {
       const { songId } = req.params;
