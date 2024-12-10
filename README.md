@@ -105,11 +105,14 @@ Operações relacionadas a músicas
 | Método | Rota               | Descrição                                | Autenticação |
 |--------|---------------------|------------------------------------------|---------------------|
 | `POST`   | `/songs`              | Criar uma nova música                   | ✅                |
+| `POST`   | `/songs/{songId}/favorite` | Adiciona uma música aos favoritos  | ✅                |
 | `GET`    | `/songs`              | Listar todas as músicas                 | ❌              |
 | `PATCH`  | `/songs/{songId}`     | Atualizar uma música                    | ✅               |
+| `DELETE` | `/songs/{songId}/favorite` | Remove uma música dos favoritos    | ✅               |
 | `DELETE` | `/songs/{songId}`     | Deletar uma música                      | ✅              |
 | `GET`    | `/songs/{songId}`     | Obter detalhes de uma música            | ❌             |
 | `GET`    | `/songs/search`       | Buscar músicas por título, artista, álbum ou gênero | ❌              |
+| `GET`    | `/songs/favorites`    | Lista todos as músicas favoritas do usuário | ✅ |
 
 ## Como Levantar a Aplicação
 
