@@ -207,3 +207,51 @@ Siga estas etapas para usar rotas autenticadas no Swagger:
 
 6. **Você está autenticado**  
    Uma vez autorizado, agora você pode acessar todas as rotas autenticadas no Swagger sem etapas adicionais!
+
+## Interagindo com a API
+
+Depois de levantar a aplicação, você pode interagir com a API usando `curl`.
+
+### Criar um Usuário
+
+```bash
+curl -X POST http://localhost:3000/users \
+  -H "Content-Type: application/json" \
+  -d '{"email": "seu_email@exemplo.com", "senha": "sua_senha"}'
+```
+
+### Fazer Login e Obter o Token
+
+```bash
+curl -X POST http://localhost:3000/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email": "seu_email@exemplo.com", "senha": "sua_senha"}'
+```
+
+A resposta incluirá algo como:
+
+```json
+{
+  "token": "SEU_TOKEN_AQUI"
+}
+```
+
+### Usar o Token para Rotas Autenticadas
+
+Substitua `SEU_TOKEN_AQUI` pelo token retornado no login para autenticar nas próximas requisições.
+
+#### Exemplo: Listar Músicas
+
+```bash
+curl -X GET http://localhost:3000/musics \
+  -H "Authorization: Bearer SEU_TOKEN_AQUI"
+```
+
+### Criar uma Música
+
+```bash
+curl -X POST http://localhost:3000/musics \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer SEU_TOKEN_AQUI" \
+  -d '{"nome": "Nova Música", "artista": "Artista Famoso", "genero": "Pop"}'
+```
