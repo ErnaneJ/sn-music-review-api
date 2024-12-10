@@ -108,6 +108,107 @@ class UserController {
       res.status(500).json({ error: 'Error updating user' });
     }
   }
+
+  static async followUser(req, res) {
+    try {
+      const { userIdToFollow } = req.body;
+      const userId = req.user.id;
+
+      if (userId === userIdToFollow) {
+        return res.status(400).json({ error: 'You cannot follow yourself.' });
+      }
+
+      const existingFollow = await prisma.follower.findUnique({
+        where: {
+          followerId_followingId: {
+            followerId: userId,
+            followingId: userIdToFollow,
+          },
+        },
+      });
+
+      if (existingFollow) {
+        return res.status(400).json({ error: 'You are already following this user.' });
+      }
+
+      await prisma.follower.create({
+        data: {
+          followerId: userId,
+          followingId: userIdToFollow,
+        },
+      });
+
+      res.status(200).json({ message: 'User followed successfully.' });
+    } catch (error) {
+      console.error('Error following user:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  }
+
+  static async unfollowUser(req, res) {
+    try {
+      const { userIdToUnfollow } = req.body;
+      const userId = req.user.id;
+
+      await prisma.follower.delete({
+        where: {
+          followerId_followingId: {
+            followerId: userId,
+            followingId: userIdToUnfollow,
+          },
+        },
+      });
+
+      res.status(200).json({ message: 'User unfollowed successfully.' });
+    } catch (error) {
+      console.error('Error unfollowing user:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  }
+
+  static async listFollowers(req, res) {
+    try {
+      const { userId } = req.params;
+
+      const followers = await prisma.follower.findMany({
+        where: {
+          followingId: parseInt(userId),
+        },
+        include: {
+          follower: {
+            select: { id: true, email: true },
+          },
+        },
+      });
+
+      res.status(200).json(followers.map((f) => f.follower));
+    } catch (error) {
+      console.error('Error listing followers:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  }
+
+  static async listFollowing(req, res) {
+    try {
+      const { userId } = req.params;
+
+      const following = await prisma.follower.findMany({
+        where: {
+          followerId: parseInt(userId),
+        },
+        include: {
+          following: {
+            select: { id: true, email: true },
+          },
+        },
+      });
+
+      res.status(200).json(following.map((f) => f.following));
+    } catch (error) {
+      console.error('Error listing following:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  }
 }
 
 module.exports = UserController;

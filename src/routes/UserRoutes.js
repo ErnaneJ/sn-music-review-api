@@ -113,4 +113,102 @@ router.get('/:userId', UserController.getUserDetails);
  */
 router.patch('/:userId', UserController.updateUser);
 
+/**
+ * @swagger
+ * /users/follow:
+ *   post:
+ *     summary: Follow a user
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               userIdToFollow:
+ *                 type: integer
+ *                 description: ID of the user to follow
+ *     responses:
+ *       200:
+ *         description: User followed successfully
+ *       400:
+ *         description: Error in following user
+ *       500:
+ *         description: Internal server error
+ */
+router.post('/follow', authMiddleware, UserController.followUser);
+
+/**
+ * @swagger
+ * /users/unfollow:
+ *   post:
+ *     summary: Unfollow a user
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               userIdToUnfollow:
+ *                 type: integer
+ *                 description: ID of the user to unfollow
+ *     responses:
+ *       200:
+ *         description: User unfollowed successfully
+ *       400:
+ *         description: Error in unfollowing user
+ *       500:
+ *         description: Internal server error
+ */
+router.post('/unfollow', authMiddleware, UserController.unfollowUser);
+
+/**
+ * @swagger
+ * /users/{userId}/followers:
+ *   get:
+ *     summary: List followers of a user
+ *     tags: [Users]
+ *     parameters:
+ *       - in: path
+ *         name: userId
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID of the user
+ *     responses:
+ *       200:
+ *         description: List of followers returned successfully
+ *       500:
+ *         description: Internal server error
+ */
+router.get('/:userId/followers', UserController.listFollowers);
+
+/**
+ * @swagger
+ * /users/{userId}/following:
+ *   get:
+ *     summary: List users followed by the user
+ *     tags: [Users]
+ *     parameters:
+ *       - in: path
+ *         name: userId
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID of the user
+ *     responses:
+ *       200:
+ *         description: List of following users returned successfully
+ *       500:
+ *         description: Internal server error
+ */
+router.get('/:userId/following', UserController.listFollowing);
+
 module.exports = router;

@@ -82,10 +82,13 @@ model FavoriteSong {
 }
 
 model Follower {
-  id          Int   @id @default(autoincrement())
   followerId  Int
   followingId Int
+  
   follower    User  @relation("UserFollowers", fields: [followerId], references: [id])
   following   User  @relation("UserFollowing", fields: [followingId], references: [id])
+  
   createdAt   DateTime @default(now())
+
+  @@id([followerId, followingId])
 }
