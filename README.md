@@ -90,6 +90,10 @@ Operações relacionadas aos usuários.
 | Método  | Rota                         | Descrição                                                | Parâmetros / Corpo                              | Resposta                             | Autenticação |
 |---------|------------------------------|----------------------------------------------------------|-------------------------------------------------|-------------------------------------|--------------|
 | `POST`  | `/users`                     | Cria um novo usuário na plataforma.                      | `email`, `password`                             | `{ id, email, createdAt, updatedAt }` | ❌            |
+| `POST`  | `/users/follow`              | Segue um usuário.                                        | `userIdToFollow`                                | `{ followerId }`                      | ✅            |
+| `POST`  | `/users/unfollow`            | Dessegue um usuário.                                     | `userIdToUnfollow`                              | `{ followerId }`                      | ✅            |
+| `GET`   | `/users/{userId}/followers`  | Lista todos os usuários que um usuário segue             | `userId`                                        | `[ { followerId, follower } ]`        | ✅            |
+| `GET`   | `/users/{userId}/following`  | Lista todos os seguidores de um usuário                  | `userId`                                        | `[ { followingId, following } ]`      | ✅            |
 | `GET`   | `/users`                     | Lista todos os usuários registrados.                     | Nenhum                                          | `[ { id, email, createdAt, updatedAt } ]` | ✅            |
 | `GET`   | `/users/{userId}`            | Obtém detalhes de um usuário específico.                 | `userId`                                        | `{ id, email, createdAt, updatedAt }` | ✅            |
 | `PATCH` | `/users/{userId}`            | Atualiza os dados de um usuário específico.              | `userId`, `email`, `password`                   | `{ id, email, updatedAt }`          | ✅            |
