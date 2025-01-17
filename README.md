@@ -255,3 +255,11 @@ curl -X POST http://localhost:3000/musics \
   -H "Authorization: Bearer SEU_TOKEN_AQUI" \
   -d '{"nome": "Nova Música", "artista": "Artista Famoso", "genero": "Pop"}'
 ```
+
+## Testest (JEST)
+
+```bash
+   npm test
+```
+
+Ou verifique o workflow clicando aqui.
