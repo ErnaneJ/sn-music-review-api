@@ -25,5 +25,6 @@ jobs:
 
       - name: Jest Run
         env:
+          DATABASE_URL: file:$(pwd)/music-api-test.db
           TEST_DATABASE_URL: file:$(pwd)/music-api-test.db
         run: npm test
