@@ -7,11 +7,12 @@ jobs:
     name: Jest
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    env:
-      DATABASE_URL: "file:./music-api-test.db"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Configure environment variables
+        run: echo "DATABASE_URL=file:./music-api-test.db" > .env
 
       - name: Use Node.js 23.4.0
         uses: actions/setup-node@v4
