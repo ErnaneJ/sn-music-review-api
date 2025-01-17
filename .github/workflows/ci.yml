@@ -28,7 +28,6 @@ jobs:
       - name: Verify Prisma Configuration
         run: npx prisma validate
 
-
       - name: Jest Run
         env:
           DATABASE_URL: file:$(pwd)/music-api-test.db

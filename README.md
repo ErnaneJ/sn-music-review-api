@@ -1,5 +1,7 @@
 # Social Network API for Music Reviews
 
+[![CI](https://github.com/ErnaneJ/sn-music-review-api/actions/workflows/ci.yml/badge.svg)](https://github.com/ErnaneJ/sn-music-review-api/actions/workflows/ci.yml)
+
 A **Music API** é uma aplicação backend desenvolvida para gerenciar músicas, usuários, avaliações, favoritos, comentários e interações entre usuários no contexto de uma plataforma musical. A API permite que os usuários registrem músicas favoritas, escrevam e leiam reviews, comentem nas músicas e interajam com outros usuários. A aplicação foi desenvolvida com **Node.js**, utilizando **Express.js** e **Prisma ORM** com **SQLite** para gerenciamento de banco de dados.
 
 **Componentes do grupo:** 
@@ -262,4 +264,4 @@ curl -X POST http://localhost:3000/musics \
    npm test
 ```
 
-Ou verifique o workflow clicando aqui.
+Ou verifique o workflow clicando [aqui](https://github.com/ErnaneJ/sn-music-review-api/actions/workflows/ci.yml).
