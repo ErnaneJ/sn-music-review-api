@@ -18,17 +18,21 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
+        working-directory: ./backend
         run: npm ci
 
       - name: Set up database environment
+        working-directory: ./backend
         run: |
           echo "DATABASE_URL=file:$(pwd)/music-api-test.db\nTEST_DATABASE_URL=file:$(pwd)/music-api-test.db\nJWT_SECRET=MY-JWT-SECRET" > .env
           cat .env
 
       - name: Verify Prisma Configuration
+        working-directory: ./backend
         run: npx prisma validate
 
       - name: Jest Run
+        working-directory: ./backend
         env:
           DATABASE_URL: file:$(pwd)/music-api-test.db
           TEST_DATABASE_URL: file:$(pwd)/music-api-test.db

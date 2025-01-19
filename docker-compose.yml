@@ -1,10 +1,29 @@
 services:
-  server:
-    build: .
+  backend:
+    build:
+      context: ./backend
     ports:
       - "3000:3000"
-      - "5555:5555" # prisma studio
+      - "5555:5555" # Prisma Studio
     volumes:
-      - .:/server
+      - ./backend:/backend
     environment:
       - NODE_ENV=development
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/frontend
+    environment:
+      - NODE_ENV=development
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
