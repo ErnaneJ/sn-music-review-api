@@ -27,7 +27,7 @@ describe('AuthController.login', () => {
       password: 'password',
     });
 
-    expect(response.status).toBe(404);
+    expect(response.status).toEqual(404);
     expect(response.body).toEqual({ error: 'User not found' });
   });
 
@@ -37,7 +37,7 @@ describe('AuthController.login', () => {
       password: 'wrongpassword',
     });
 
-    expect(response.status).toBe(400);
+    expect(response.status).toEqual(400);
     expect(response.body).toEqual({ error: 'Invalid email or password' });
   });
 
@@ -46,7 +46,7 @@ describe('AuthController.login', () => {
       email: 'user@example.com', password: 'hashedpassword',
     });
 
-    expect(response.status).toBe(200);
+    expect(response.status).toEqual(200);
     expect(response.body).toHaveProperty('token');
     expect(jwt.decode(response.body.token).email).toEqual('user@example.com');
   });
