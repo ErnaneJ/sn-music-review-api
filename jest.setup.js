@@ -1,8 +1,7 @@
-// Importar o PrismaClient para garantir que a conexão ao banco de dados esteja pronta
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-beforeAll(async () => {
+beforeEach(async () => {
   jest.clearAllMocks();
   
   await prisma.$connect();
@@ -15,7 +14,7 @@ beforeAll(async () => {
   await prisma.user.deleteMany();
 });
 
-afterAll(async () => {
+afterEach(async () => {
   jest.clearAllMocks();
 
   await prisma.like.deleteMany();

@@ -1,14 +1,15 @@
 const request = require('supertest');
 const { PrismaClient } = require('@prisma/client');
-const app = require('../../src/server');
+
 const bcrypt = require('bcryptjs');
 
-const prisma = new PrismaClient();
-
 describe('CommentController', () => {
+  const app = require('../../src/server');  
+  const prisma = new PrismaClient();
+
   let user, song, review, token;
 
-  beforeAll(async () => {
+  beforeEach(async () => {
     user = await prisma.user.create({
       data: { email: 'user@example.com', password: await bcrypt.hash('plaintextpassword', 10) },
     });
@@ -28,13 +29,11 @@ describe('CommentController', () => {
     });
 
     const loginResponse = await request(app).post('/auth/login').send({
-      email: 'user@example.com', password: 'plaintextpassword',
+      email: user.email, password: 'plaintextpassword',
     });
 
     token = `Bearer ${loginResponse.body.token}`;
   });
-
-  afterAll(async () => { });
 
   describe('POST /comments', () => {
     it('should create a new comment without parent', async () => {
