@@ -187,7 +187,6 @@ class SongController {
   }
 
   static async searchSongs(req, res) {
-    console.log("opa")
     try {
       const { query } = req.query;
 
