@@ -11,6 +11,7 @@ beforeEach(async () => {
   await prisma.favoriteSong.deleteMany();
   await prisma.review.deleteMany();
   await prisma.song.deleteMany();
+  await prisma.follower.deleteMany();
   await prisma.user.deleteMany();
 });
 
@@ -22,6 +23,7 @@ afterEach(async () => {
   await prisma.favoriteSong.deleteMany();
   await prisma.review.deleteMany();
   await prisma.song.deleteMany();
+  await prisma.follower.deleteMany();
   await prisma.user.deleteMany();
 
   await prisma.$disconnect();

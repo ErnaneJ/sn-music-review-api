@@ -13,7 +13,7 @@ class ReviewController {
 
       const review = await prisma.review.create({
         data: {
-          content, rating, userId,songId,
+          content, rating, userId, songId
         },
       });
 
