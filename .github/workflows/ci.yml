@@ -22,7 +22,7 @@ jobs:
 
       - name: Set up database environment
         run: |
-          echo "DATABASE_URL=file:$(pwd)/music-api-test.db\TEST_DATABASE_URL=file:$(pwd)/music-api-test.db" > .env
+          echo "DATABASE_URL=file:$(pwd)/music-api-test.db\nTEST_DATABASE_URL=file:$(pwd)/music-api-test.db\nJWT_SECRET=MY-JWT-SECRET" > .env
           cat .env
 
       - name: Verify Prisma Configuration
