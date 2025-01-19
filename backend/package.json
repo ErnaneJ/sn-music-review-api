@@ -10,9 +10,11 @@
   },
   "jest": {
     "testEnvironment": "node",
-    "globalSetup": "./prisma/setupTestDB.js", 
+    "globalSetup": "./prisma/setupTestDB.js",
     "globalTeardown": "./prisma/teardownTestDB.js",
-    "setupFilesAfterEnv": ["<rootDir>/jest.setup.js"]
+    "setupFilesAfterEnv": [
+      "<rootDir>/jest.setup.js"
+    ]
   },
   "keywords": [],
   "author": "",
@@ -21,6 +23,7 @@
   "dependencies": {
     "@prisma/client": "^6.0.1",
     "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",

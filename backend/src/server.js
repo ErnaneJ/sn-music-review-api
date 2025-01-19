@@ -5,6 +5,8 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const setupSwagger = require('./swagger');
 
+const cors = require('cors');
+
 const AuthRoutes    = require('./routes/AuthRoutes');
 const CommentRoutes = require('./routes/CommentRoutes');
 const LikeRoutes    = require('./routes/LikeRoutes');
@@ -12,7 +14,15 @@ const ReviewRoutes  = require('./routes/ReviewRoutes');
 const SongRoutes    = require('./routes/SongRoutes');
 const UserRoutes    = require('./routes/UserRoutes');
 
+const corsOptions = {
+  origin: 'http://localhost:5173',
+  methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+};
+
 const app = express();
+
+app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 
