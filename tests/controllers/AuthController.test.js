@@ -19,6 +19,7 @@ describe('AuthController.login', () => {
 
   afterEach(async () => {
     await prisma.user.deleteMany();
+    jest.clearAllMocks();
   });
 
   it('should return 404 when the user is not found', async () => {
