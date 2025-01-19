@@ -12,7 +12,7 @@ describe('AuthController.login', () => {
     await prisma.user.create({
       data: {
         email: 'user@example.com',
-        password: await bcrypt.hash('hashedpassword', 10),
+        password: await bcrypt.hash('plaintextpassword', 10),
       }
     });
   });
@@ -44,7 +44,7 @@ describe('AuthController.login', () => {
 
   it('should return a token for valid credentials', async () => {
     const response = await request(app).post('/auth/login').send({
-      email: 'user@example.com', password: 'hashedpassword',
+      email: 'user@example.com', password: 'plaintextpassword',
     });
 
     expect(response.status).toEqual(200);
@@ -56,7 +56,7 @@ describe('AuthController.login', () => {
     jest.spyOn(bcrypt, 'compare').mockRejectedValue(new Error('Server error'));
 
     const response = await request(app).post('/auth/login').send({
-      email: 'user@example.com', password: 'hashedpassword'
+      email: 'user@example.com', password: 'plaintextpassword'
     });
 
     expect(response.status).toEqual(500);

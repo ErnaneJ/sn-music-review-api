@@ -15,7 +15,7 @@ class CommentController {
 
       res.status(201).json(newComment);
     } catch (error) {
-      console.error('Error creating comment:', error);
+      // console.error('Error creating comment:', error);
       res.status(500).json({ error: 'Error creating comment' });
     }
   }
