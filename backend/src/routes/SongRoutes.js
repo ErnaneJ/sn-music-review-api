@@ -106,6 +106,15 @@ router.get('/search', SongController.searchSongs);
  *                   releaseYear:
  *                     type: integer
  *                     description: Release year of the song
+ *                   cover_image:
+ *                     type: string
+ *                     description: URL of the song's cover image
+ *                   did:
+ *                     type: string
+ *                     description: Deezer ID of the song   
+ *                   duration:
+ *                     type: integer
+ *                     description: Duration of the song in minutes
  *       500:
  *         description: Internal server error
  */

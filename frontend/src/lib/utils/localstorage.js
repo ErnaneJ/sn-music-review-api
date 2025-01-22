@@ -46,7 +46,7 @@ export function createPersistentStore(key, initialValue) {
   const store = writable(initial);
   store.subscribe((value) => {
     if (isLocalStorageAvailable()) {
-      setLocalStorageWithExpiry(key, value, 300000);
+      setLocalStorageWithExpiry(key, value, 3.6e+6);
     }
   });
   return store;

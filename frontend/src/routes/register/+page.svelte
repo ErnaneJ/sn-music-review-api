@@ -1,4 +1,5 @@
 <script>
+  import { setFlash } from '$lib/stores/flash.svelte';
   import { token } from '$lib/stores/auth.svelte';
   import { onMount } from 'svelte';
   import { user } from '$lib/stores/user.svelte';
@@ -13,12 +14,12 @@
     e.preventDefault();
 
     if (userEmail === '' || userPassword === '') {
-      alert('Please fill in all fields');
+      setFlash({ title: 'Warning', message: 'Please fill in all fields', type: 'warning' });
       return;
     }
 
     if (userPassword !== userPasswordConfirmation) {
-      alert('Passwords do not match');
+      setFlash({ title: 'Warning', message: 'Passwords do not match', type: 'warning' });
       return;
     }
 

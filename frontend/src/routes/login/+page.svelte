@@ -1,4 +1,5 @@
 <script>
+  import { setFlash } from '$lib/stores/flash.svelte';
   import { token } from '$lib/stores/auth.svelte';
   import { onMount } from 'svelte';
   import { login } from '$lib/api/auth';
@@ -9,15 +10,15 @@
 
   let userEmail = '';
   let userPassword = '';
-  function handleLogin(e){
+  async function handleLogin(e){
     e.preventDefault();
 
     if (userEmail === '' || userPassword === '') {
-      alert('Please fill in all fields');
+      setFlash({ title: 'Warning', message: 'Please fill in all fields', type: 'warning' });
       return;
     }
 
-    const strToken = login(userEmail, userPassword);
+    const strToken = await login(userEmail, userPassword);
     
     if (strToken) {
       token.set(strToken);

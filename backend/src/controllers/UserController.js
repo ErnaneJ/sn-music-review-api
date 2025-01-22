@@ -79,7 +79,7 @@ class UserController {
   static async updateUser(req, res) {
     try {
       const { userId } = req.params;
-      const { email, password } = req.body;
+      const { email, password, image, name } = req.body;
 
       const user = await prisma.user.findUnique({
         where: { id: parseInt(userId, 10) },
@@ -98,6 +98,8 @@ class UserController {
         where: { id: parseInt(userId, 10) },
         data: {
           email: email || user.email,
+          name: name || user.name,
+          image: image || user.image,
           password: hashedPassword,
         },
       });

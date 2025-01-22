@@ -4,7 +4,15 @@ const prisma = new PrismaClient();
 class SongController {
   static async createSong(req, res) {
     try {
-      const { title, artist, album, genre, releaseYear } = req.body;
+      const { 
+        title,
+        artist,
+        album,
+        genre,
+        did,
+        cover_image,
+        duration,
+       } = req.body;
 
       const song = await prisma.song.create({
         data: {
@@ -12,10 +20,12 @@ class SongController {
           artist,
           album,
           genre,
-          releaseYear: releaseYear ? parseInt(releaseYear, 10) : null,
+          did,
+          cover_image,
+          duration: parseInt(duration, 10),
         },
       });
-
+      song.did = String(song.did);
       res.status(201).json(song);
     } catch (error) {
       console.error('Error creating music:', error);
@@ -168,8 +178,13 @@ class SongController {
     try {
       const { songId } = req.params;
 
-      const song = await prisma.song.findUnique({
-        where: { id: parseInt(songId, 10) },
+      const song = await prisma.song.findFirst({
+        where: {
+          OR: [
+            { id: Number(songId) },
+            { did: songId },
+          ],
+        },
         include: {
           reviews: true,
         },

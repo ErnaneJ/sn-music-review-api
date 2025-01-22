@@ -13,7 +13,7 @@ class ReviewController {
 
       const review = await prisma.review.create({
         data: {
-          content, rating, userId, songId
+          content, rating: parseInt(rating), userId, songId
         },
       });
 
@@ -73,6 +73,46 @@ class ReviewController {
     } catch (error) {
       console.error('Error when deleting review:', error);
       res.status(500).json({ error: 'Error when deleting review' });
+    }
+  }
+
+  static async getLastReviews(req, res) {
+    try {
+      const reviews = await prisma.review.findMany({
+        take: 500,
+        orderBy: { createdAt: 'desc' },
+        include: {
+          user: { select: { id: true, email: true, image: true, name: true } },
+          song: { select: { id: true, title: true, cover_image: true, duration: true, did: true, artist: true, album: true, genre: true,
+          } },
+          comments: { 
+            select: { 
+              id: true, 
+              content: true, 
+              createdAt: true, 
+              updatedAt: true, 
+              userId: true, 
+              parentId: true, 
+              reviewId: true,
+              user: { select: { id: true, email: true, image: true, name: true } },
+              replies: {
+                select: { id: true, content: true, createdAt: true, updatedAt: true }
+              }
+            }
+          },
+          likes: {
+            select: {
+              id: true,
+              userId: true
+            }
+          }
+        },
+      });
+
+      res.status(200).json(reviews);
+    } catch (error) {
+      console.error('Error when searching for reviews:', error);
+      res.status(500).json({ error: 'Error when searching for reviews' });
     }
   }
 

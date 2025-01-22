@@ -20,6 +20,8 @@ model User {
   likes         Like[]
   favoriteSongs FavoriteSong[]
   comments      Comment[]
+  image         String?
+  name          String?
 }
 
 model Song {
@@ -33,6 +35,9 @@ model Song {
   updatedAt DateTime  @updatedAt
   reviews   Review[]
   favorites FavoriteSong[]
+  did         String
+  cover_image String?
+  duration    Int?
 }
 
 model Review {
@@ -43,8 +48,8 @@ model Review {
   updatedAt DateTime  @updatedAt
   userId    Int
   songId    Int
-  user      User      @relation(fields: [userId], references: [id])
-  song      Song      @relation(fields: [songId], references: [id])
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  song      Song      @relation(fields: [songId], references: [id], onDelete: Cascade)
   likes     Like[]
   comments  Comment[] @relation("ReviewComments")
 }
@@ -53,8 +58,8 @@ model Like {
   id       Int      @id @default(autoincrement())
   userId   Int
   reviewId Int
-  user     User     @relation(fields: [userId], references: [id])
-  review   Review   @relation(fields: [reviewId], references: [id])
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  review   Review   @relation(fields: [reviewId], references: [id], onDelete: Cascade)
 }
 
 model Comment {
@@ -65,9 +70,9 @@ model Comment {
   userId      Int
   reviewId    Int?
   parentId    Int?
-  user        User     @relation(fields: [userId], references: [id])
-  review      Review?  @relation("ReviewComments", fields: [reviewId], references: [id])
-  parent      Comment? @relation("CommentReplies", fields: [parentId], references: [id])
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  review      Review?  @relation("ReviewComments", fields: [reviewId], references: [id], onDelete: Cascade)
+  parent      Comment? @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
   replies     Comment[] @relation("CommentReplies")
 }
 
@@ -75,8 +80,8 @@ model FavoriteSong {
   id       Int    @id @default(autoincrement())
   userId   Int
   songId   Int
-  user     User   @relation(fields: [userId], references: [id])
-  song     Song   @relation(fields: [songId], references: [id])
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  song     Song   @relation(fields: [songId], references: [id], onDelete: Cascade)
  
   @@unique([userId, songId])
 }
@@ -85,8 +90,8 @@ model Follower {
   followerId  Int
   followingId Int
   
-  follower    User  @relation("UserFollowers", fields: [followerId], references: [id])
-  following   User  @relation("UserFollowing", fields: [followingId], references: [id])
+  follower    User  @relation("UserFollowers", fields: [followerId], references: [id], onDelete: Cascade)
+  following   User  @relation("UserFollowing", fields: [followingId], references: [id], onDelete: Cascade)
   
   createdAt   DateTime @default(now())
 

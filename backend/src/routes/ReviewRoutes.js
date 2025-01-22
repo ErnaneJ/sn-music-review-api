@@ -113,6 +113,20 @@ router.delete('/:reviewId', authMiddleware, ReviewController.deleteReview);
 
 /**
  * @swagger
+ * /reviews:
+ *   get:
+ *     summary: List last reviews
+ *     tags: [Reviews]
+ *     responses:
+ *       200:
+ *         description: List of reviews successfully retrieved
+ *       500:
+ *         description: Error retrieving reviews
+ */
+router.get('/', ReviewController.getLastReviews);
+
+/**
+ * @swagger
  * /reviews/song/{songId}:
  *   get:
  *     summary: List reviews for a song

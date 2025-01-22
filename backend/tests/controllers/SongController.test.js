@@ -30,6 +30,7 @@ describe('SongController', () => {
           artist: 'Artist Name',
           album: 'Album Name',
           genre: 'Pop',
+          did: "123",
           releaseYear: 2023,
         });
 
@@ -47,6 +48,7 @@ describe('SongController', () => {
           artist: 'Artist 1',
           album: 'Album 1',
           genre: 'Pop',
+          did: "123",
           releaseYear: 2023,
         },
       });
@@ -66,6 +68,7 @@ describe('SongController', () => {
           artist: 'Artist 2',
           album: 'Album 2',
           genre: 'Rock',
+          did: "123",
           releaseYear: 2023,
         },
       });
@@ -87,6 +90,7 @@ describe('SongController', () => {
           artist: 'Artist 2',
           album: 'Album 2',
           genre: 'Rock',
+          did: "123",
           releaseYear: 2023,
         },
       });
@@ -124,6 +128,7 @@ describe('SongController', () => {
           artist: 'Artist 2',
           album: 'Album 2',
           genre: 'Rock',
+          did: "123",
           releaseYear: 2023,
         },
       });
@@ -160,6 +165,7 @@ describe('SongController', () => {
           artist: 'Artist 2',
           album: 'Album 2',
           genre: 'Rock',
+          did: "123",
           releaseYear: 2023,
         },
       });
@@ -187,6 +193,7 @@ describe('SongController', () => {
           artist: 'Artist 2',
           album: 'Album 2',
           genre: 'Rock',
+          did: "123",
           releaseYear: 2023,
         },
       });
@@ -215,6 +222,7 @@ describe('SongController', () => {
           artist: 'Artist Name',
           album: 'Album Name',
           genre: 'Pop',
+          did: "123",
           releaseYear: 2023,
         },
       });
@@ -235,6 +243,7 @@ describe('SongController', () => {
           artist: 'Test Artist',
           album: 'Test Album',
           genre: 'Pop',
+          did: "123",
           releaseYear: 2023,
         },
       });

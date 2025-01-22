@@ -17,6 +17,7 @@ beforeEach(async () => {
       artist: "Um artista bem legal",
       album: "Um album bem legal",
       genre: "Pop",
+      did: "123",
       releaseYear: 2023,
     },
   });

@@ -20,6 +20,7 @@ describe('CommentController', () => {
         artist: "Um artista bem legal",
         album: "Um album bem legal (Corazón Partío) (Ao Vivo)",
         genre: "Pop",
+        did: "123",
         releaseYear: 2023,
       },
     });

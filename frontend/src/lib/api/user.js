@@ -1,3 +1,4 @@
+import { setFlash } from '$lib/stores/flash.svelte';
 const ENDPOINT = "http://localhost:3000";
 
 export async function createUser(email, password) {
@@ -12,15 +13,17 @@ export async function createUser(email, password) {
 
     if (!response.ok) {
       const errorData = await response.json();
+      setFlash({title: 'Erro', message: errorData.message, type: 'error'});
       console.log('Erro:', errorData.message);
       return;
     }
 
     const data = await response.json();
-    alert('Usuário criado com sucesso!');
+    setFlash({title: 'Sucesso', message: 'User created successfully!', type: 'success'});
     return data;
   } catch (error) {
-    console.error('Erro ao criar usuário:', error);
+    console.error('Error creating user:', error);
+    setFlash({title: 'Erro', message: 'Error creating user', type: 'error'});
   }
 };
 
@@ -30,21 +33,21 @@ export async function listUsers(token) {
       method: 'GET',
       headers: { 
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`, // Inclui o token no cabeçalho
+        'Authorization': `Bearer ${token}`,
       },
     });
 
     if (!response.ok) {
       const errorData = await response.json();
       console.log('Erro:', errorData.message);
+      setFlash({title: 'Erro', message: errorData.message, type: 'error'});
       return;
     }
 
     const data = await response.json();
-    console.log('Usuários:', data);
     return data;
   } catch (error) {
-    console.error('Erro ao listar usuários:', error);
+    console.error('Error listing users:', error);
   }
 };
 
@@ -71,7 +74,7 @@ export async function getUserDetails(userId) {
   }
 };
 
-export async function updateUser(userId, email, password, token) {
+export async function updateUser(userId, name, email, password, image, token) {
   try {
     const response = await fetch(`${ENDPOINT}/users/${userId}`, {
       method: 'PATCH',
@@ -79,7 +82,12 @@ export async function updateUser(userId, email, password, token) {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`, // Inclui o token no cabeçalho
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ 
+        name, 
+        email, 
+        password, 
+        image,
+      }),
     });
 
     if (!response.ok) {

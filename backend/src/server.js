@@ -15,7 +15,7 @@ const SongRoutes    = require('./routes/SongRoutes');
 const UserRoutes    = require('./routes/UserRoutes');
 
 const corsOptions = {
-  origin: 'http://localhost:5173',
+  origin: '*',
   methods: ['GET', 'POST', 'PATCH', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 };

@@ -28,7 +28,7 @@ class AuthController {
         { expiresIn: '1h' }
       );
 
-      res.json({ token });
+      res.json({ token, id: user.id });
     } catch (error) {
       // console.error('Login error:', error);
       res.status(500).json({ error: 'Server error' });
